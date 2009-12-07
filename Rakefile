@@ -5,11 +5,11 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "checkpoint"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = "A collection of simple authentication rack middleware."
+    gem.description = "This is a growing collection of rack middleware pieces to handle Hot Ink SSO authentication."
     gem.email = "me@chrisdinn.ca"
-    gem.homepage = "http://github.com/massdev/checkpoint"
-    gem.authors = ["chrisdinn"]
+    gem.homepage = "http://github.com/chrisdinn/checkpoint"
+    gem.authors = ["Chris Dinn"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end

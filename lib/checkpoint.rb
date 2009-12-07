@@ -1,0 +1,7 @@
+require 'rubygems'
+require 'rack'
+require 'active_record'
+require 'clearance'
+require 'checkpoint/idcheck'
+require 'checkpoint/sessions'
+require 'checkpoint/user'
