@@ -8,7 +8,7 @@ module Checkpoint
         if user.nil?
           session.delete(:checkpoint_user_id)
         else
-          session[:checkpoint_user_id] = user.id
+          session[:checkpoint_user_id] = user.id if user.email_confirmed
         end
       end
 

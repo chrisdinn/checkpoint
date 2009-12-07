@@ -13,6 +13,12 @@ describe "Checkpoint::Sessions" do
     last_response.body.should include("log in")
   end
   
+  it "should not log in unconfirmed user" do
+    user = Factory(:unconfirmed_user, :password => "sesh_path", :password_confirmation => "sesh_path")
+    post '/sso/login', :email => user.email, :password => "sesh_path"
+    last_response.status.should == 401
+  end
+  
   it "should login user with valid credentials" do
     user = Factory(:user, :password => "sesh_path", :password_confirmation => "sesh_path")
     post '/sso/login', :email => user.email, :password => "sesh_path"

@@ -22,6 +22,14 @@ Factory.define :user, :class => Checkpoint::User do |user|
   user.email                 { Factory.next :email }
   user.password              { "password" }
   user.password_confirmation { "password" }
+  user.email_confirmed       { true }
+end
+
+Factory.define :unconfirmed_user, :class => Checkpoint::User do |user|
+  user.email                 { Factory.next :email }
+  user.password              { "password" }
+  user.password_confirmation { "password" }
+  user.email_confirmed       { false }
 end
 
 Factory.sequence :email do |n|
