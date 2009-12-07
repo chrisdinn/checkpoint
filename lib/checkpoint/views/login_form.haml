@@ -1,6 +1,6 @@
 %fieldset
   %legend You need to log in, buddy.
-  %form{:action => '/sso/login', :method => 'POST'}
+  %form{:action => "#{absolute_url('/sso/login')}", :method => 'POST'}
     %label{:for => 'email'} 
       Email:
       %input{:type => 'text', :name => 'email', :id => 'email'}
