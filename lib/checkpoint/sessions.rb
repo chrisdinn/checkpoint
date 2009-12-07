@@ -38,7 +38,7 @@ module Checkpoint
       
       get '/sso/logout' do
         session.clear
-        redirect absolute_url("/")
+        redirect absolute_url("/sso/login")
       end
       
     end
