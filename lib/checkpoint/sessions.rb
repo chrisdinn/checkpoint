@@ -11,7 +11,7 @@ module Checkpoint
           session[:checkpoint_user_id] = user.id
         end
       end
-      
+
       def ensure_authenticated
         throw(:halt, [401, haml(:login_form)]) unless current_user
       end
@@ -26,19 +26,19 @@ module Checkpoint
       
       get '/sso/login' do
         ensure_authenticated
-        redirect "/"
+        redirect absolute_url("/")
       end
       
       post '/sso/login' do
         @user = ::Checkpoint::User.authenticate(params['email'], params['password'])
         login_as(@user)
         ensure_authenticated
-        redirect "/"
+        redirect absolute_url("/")
       end
       
       get '/sso/logout' do
         session.clear
-        redirect '/'
+        redirect absolute_url("/")
       end
       
     end

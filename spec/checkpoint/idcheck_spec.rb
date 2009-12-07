@@ -14,7 +14,7 @@ describe "Checkpoint::IDCheck" do
   end
   
   it "should allow request with proper credentials" do
-    get "/", {}, {'checkpoint_user_id' => '1'}
+    get "/", {}, 'rack.session' => {:checkpoint_user_id => '1'}
     last_response.should be_ok
   end
   
