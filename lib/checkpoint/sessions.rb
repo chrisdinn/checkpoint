@@ -12,11 +12,6 @@ module Checkpoint
         end
       end
       
-      def current_user
-        session[:checkpoint_user_id].nil? ?
-                  nil : ::Checkpoint::User.find(session[:checkpoint_user_id])
-      end
-      
       def ensure_authenticated
         throw(:halt, [401, haml(:login_form)]) unless current_user
       end
@@ -25,6 +20,7 @@ module Checkpoint
     class App < Sinatra::Base
       enable :sessions
       helpers Helpers
+      helpers ::Checkpoint::Authentication
       
       set :views, File.dirname(__FILE__) + '/views'
       

@@ -5,11 +5,10 @@ require 'checkpoint'
 ActiveRecord::Base.establish_connection :adapter => "mysql",
   :encoding => "utf8",
   :reconnect => false,
-  :database => "masthead_test",
+  :database => "galileo_test",
   :pool => 5,
   :username => "root",
-  :password => "",
-  :socket => "/tmp/mysql.sock"
+  :password => ""
 
 require 'spec'
 require 'spec/autorun'

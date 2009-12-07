@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Chris Dinn"]
-  s.date = %q{2009-12-06}
+  s.date = %q{2009-12-07}
   s.description = %q{This is a growing collection of rack middleware pieces to handle Hot Ink SSO authentication.}
   s.email = %q{me@chrisdinn.ca}
   s.extra_rdoc_files = [
@@ -23,7 +23,17 @@ Gem::Specification.new do |s|
      "README.rdoc",
      "Rakefile",
      "VERSION",
+     "checkpoint.gemspec",
      "lib/checkpoint.rb",
+     "lib/checkpoint/authentication.rb",
+     "lib/checkpoint/idcheck.rb",
+     "lib/checkpoint/sessions.rb",
+     "lib/checkpoint/user.rb",
+     "lib/checkpoint/views/login_form.haml",
+     "spec/checkpoint/authentication_spec.rb",
+     "spec/checkpoint/idcheck_spec.rb",
+     "spec/checkpoint/sessions_spec.rb",
+     "spec/checkpoint/user_spec.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb"
   ]
@@ -33,7 +43,10 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.5}
   s.summary = %q{A collection of simple authentication rack middleware.}
   s.test_files = [
-    "spec/idcheck_spec.rb",
+    "spec/checkpoint/authentication_spec.rb",
+     "spec/checkpoint/idcheck_spec.rb",
+     "spec/checkpoint/sessions_spec.rb",
+     "spec/checkpoint/user_spec.rb",
      "spec/spec_helper.rb"
   ]
 
