@@ -26,14 +26,19 @@ Gem::Specification.new do |s|
      "checkpoint.gemspec",
      "lib/checkpoint.rb",
      "lib/checkpoint/authentication.rb",
+     "lib/checkpoint/consumer.rb",
      "lib/checkpoint/idcheck.rb",
+     "lib/checkpoint/openid_server.rb",
      "lib/checkpoint/sessions.rb",
      "lib/checkpoint/user.rb",
      "lib/checkpoint/views/login_form.haml",
      "spec/checkpoint/authentication_spec.rb",
+     "spec/checkpoint/consumer_spec.rb",
      "spec/checkpoint/idcheck_spec.rb",
+     "spec/checkpoint/openid_server_spec.rb",
      "spec/checkpoint/sessions_spec.rb",
      "spec/checkpoint/user_spec.rb",
+     "spec/matchers.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb"
   ]
@@ -44,9 +49,12 @@ Gem::Specification.new do |s|
   s.summary = %q{A collection of simple authentication rack middleware.}
   s.test_files = [
     "spec/checkpoint/authentication_spec.rb",
+     "spec/checkpoint/consumer_spec.rb",
      "spec/checkpoint/idcheck_spec.rb",
+     "spec/checkpoint/openid_server_spec.rb",
      "spec/checkpoint/sessions_spec.rb",
      "spec/checkpoint/user_spec.rb",
+     "spec/matchers.rb",
      "spec/spec_helper.rb"
   ]
 

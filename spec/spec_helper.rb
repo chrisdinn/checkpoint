@@ -52,7 +52,7 @@ Spec::Runner.configure do |config|
      post '/sso/login', :email => user.email, :password => user.password
   end
   
-  config.before(:suite) do
+  config.after(:suite) do
     DatabaseCleaner.clean
   end
 end
