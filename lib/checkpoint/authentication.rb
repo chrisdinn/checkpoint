@@ -1,6 +1,14 @@
 module Checkpoint
   # Authentication Helpers for apps that use Checkpoint
   module Authentication
+    def sign_in(user)
+      if user.nil?
+        session.delete(:checkpoint_user_id)
+      else
+        session[:checkpoint_user_id] = user.id if user.email_confirmed
+      end
+    end
+    
     def current_user
       session[:checkpoint_user_id].nil? ? nil : ::Checkpoint::User.find(session[:checkpoint_user_id])
     end

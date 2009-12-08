@@ -4,14 +4,6 @@ require 'sinatra/base'
 module Checkpoint
   module Sessions
     module Helpers
-      def login_as(user)
-        if user.nil?
-          session.delete(:checkpoint_user_id)
-        else
-          session[:checkpoint_user_id] = user.id if user.email_confirmed
-        end
-      end
-
       def ensure_authenticated
         throw(:halt, [401, haml(:login_form)]) unless current_user
       end
@@ -31,7 +23,7 @@ module Checkpoint
       
       post '/sso/login' do
         @user = ::Checkpoint::User.authenticate(params['email'], params['password'])
-        login_as(@user)
+        sign_in(@user)
         ensure_authenticated
         redirect absolute_url("/")
       end
