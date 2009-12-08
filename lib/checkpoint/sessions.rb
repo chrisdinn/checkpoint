@@ -2,16 +2,9 @@ require 'haml'
 require 'sinatra/base'
 
 module Checkpoint
-  module Sessions
-    module Helpers
-      def ensure_authenticated
-        throw(:halt, [401, haml(:login_form)]) unless current_user
-      end
-    end
-    
+  module Sessions  
     class App < Sinatra::Base
       enable :sessions
-      helpers Helpers
       helpers ::Checkpoint::Authentication
       
       set :views, File.dirname(__FILE__) + '/views'

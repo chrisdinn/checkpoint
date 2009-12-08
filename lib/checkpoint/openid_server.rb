@@ -36,6 +36,8 @@ module Checkpoint
       app.helpers ::Checkpoint::Authentication
       app.helpers Helpers
       
+      app.set :views, File.dirname(__FILE__) + '/views'
+      
       [:get, :post].each do |meth|
         app.send(meth, '/sso') do
           begin
@@ -53,6 +55,7 @@ module Checkpoint
             session[:hancock_server_return_to] = oidreq.return_to
             
             # Authenticate user AND consumer
+            ensure_authenticated # let user log in!
             forbidden! unless current_user && ::Checkpoint::Consumer.allowed?(oidreq.trust_root)
             
             oidreq.identity = oidreq.claimed_id = url_for_user

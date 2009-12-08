@@ -13,6 +13,7 @@ ActiveRecord::Base.establish_connection :adapter => "mysql",
 require 'spec'
 require 'spec/autorun'
 require 'rack/test'
+require 'webrat'
 require 'factory_girl'
 require 'database_cleaner'
 require File.expand_path(File.dirname(__FILE__) + '/matchers')

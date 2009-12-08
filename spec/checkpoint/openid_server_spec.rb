@@ -73,6 +73,73 @@ describe "Checkpoint::OpenIDServer" do
           end
         end
       end
+        
+      describe "when NOT authenticated" do
+        it "should require authentication" do
+          params = {
+            "openid.ns" => "http://specs.openid.net/auth/2.0",
+            "openid.mode" => "checkid_setup",
+            "openid.return_to" => @consumer.url,
+            "openid.identity" => @identity_url,
+            "openid.claimed_id" => @identity_url
+          }
+
+          get "/sso", params
+          last_response.body.should be_a_login_form
+        end
+      end      
     end
+
+    describe "with openid mode of checkid_immediate" do
+      describe "unauthenticated user" do
+        it "should require authentication" do
+          params = {
+            "openid.ns" => "http://specs.openid.net/auth/2.0",
+            "openid.mode" => "checkid_immediate",
+            "openid.return_to" => @consumer.url,
+            "openid.identity" => @identity_url,
+            "openid.claimed_id" => @identity_url
+          }
+
+          get "/sso", params
+          last_response.body.should be_a_login_form
+        end
+      end
+      
+      describe "authenticated user" do
+        describe "with appropriate request parameters" do
+          it "should redirect to the consumer app" do
+            params = {
+              "openid.ns" => "http://specs.openid.net/auth/2.0",
+              "openid.mode" => "checkid_immediate",
+              "openid.return_to" => @consumer.url,
+              "openid.identity" => @identity_url,
+              "openid.claimed_id" => @identity_url
+            }
+
+            login(@user)
+            get "/sso", params
+            last_response.should be_an_openid_immediate_response(@consumer, @user)
+          end
+        end
+
+        describe "attempting to access from an untrusted consumer" do
+          it "cancel the openid request" do
+            params = {
+              "openid.ns" => "http://specs.openid.net/auth/2.0",
+              "openid.mode" => "checkid_immediate",
+              "openid.return_to" => "http://rogueconsumerapp.com/",
+              "openid.identity" => @identity_url,
+              "openid.claimed_id" => @identity_url
+            }
+
+            login(@user)
+            get "/sso", params
+            last_response.status.should == 403
+          end
+        end
+      end
+    end
+
   end
 end
