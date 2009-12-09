@@ -10,7 +10,14 @@ module Checkpoint
     end
     
     def ensure_authenticated
+      if trust_root = session_return_to
+        forbidden! unless ::Checkpoint::Consumer.allowed?(trust_root)
+      end
       throw(:halt, [401, haml(:login_form)]) unless current_user
+    end
+    
+    def forbidden!
+      throw :halt, [403, 'Forbidden']
     end
     
     def current_user
@@ -19,6 +26,10 @@ module Checkpoint
     
     def signed_in?
       !current_user.nil?
+    end
+    
+    def session_return_to
+      session[:checkpoint_return_to]
     end
     
     def absolute_url(suffix = nil)

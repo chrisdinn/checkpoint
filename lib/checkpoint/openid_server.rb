@@ -1,10 +1,6 @@
 module Checkpoint
   module OpenIDServer
     module Helpers
-      def forbidden!
-        throw :halt, [403, 'Forbidden']
-      end
-      
       def server
         if @server.nil?
           store = OpenID::Store::Filesystem.new(File.join(Dir.tmpdir, 'openid-store'))
@@ -43,7 +39,7 @@ module Checkpoint
           begin
             oidreq = server.decode_request(params)
           rescue OpenID::Server::ProtocolError => e
-            oidreq = session[:hancock_server_last_oidreq]
+            oidreq = session[:checkpoint_last_oidreq]
           end
           throw(:halt, [400, 'Bad Request']) unless oidreq
            
@@ -51,8 +47,8 @@ module Checkpoint
           
           if oidreq.kind_of?(OpenID::Server::CheckIDRequest)
             # Store request
-            session[:hancock_server_last_oidreq] = oidreq
-            session[:hancock_server_return_to] = oidreq.return_to
+            session[:checkpoint_last_oidreq] = oidreq
+            session[:checkpoint_return_to] = oidreq.return_to
             
             # Authenticate user AND consumer
             ensure_authenticated # let user log in!

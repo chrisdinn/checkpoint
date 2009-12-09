@@ -18,7 +18,7 @@ module Checkpoint
         @user = ::Checkpoint::User.authenticate(params['email'], params['password'])
         sign_in(@user)
         ensure_authenticated
-        redirect absolute_url("/")
+        redirect session_return_to || absolute_url("/")
       end
       
       get '/sso/logout' do
