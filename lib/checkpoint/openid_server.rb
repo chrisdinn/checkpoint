@@ -65,10 +65,12 @@ module Checkpoint
             session[:checkpoint_return_to] = oidreq.return_to
             
             # Authenticate user AND consumer
-            ensure_authenticated # let user log in!
-            forbidden! unless current_user && ::Checkpoint::Consumer.allowed?(oidreq.trust_root)
-            
-            oidreq.identity = oidreq.claimed_id = url_for_user
+            throw(:halt, [401, haml(:login_form)]) unless current_user
+            unless oidreq.identity == url_for_user
+               forbidden!
+            end
+            forbidden! unless ::Checkpoint::Consumer.allowed?(oidreq.trust_root)
+
             oidresp = oidreq.answer(true, nil, oidreq.identity)
             
             # Add in Sreg data

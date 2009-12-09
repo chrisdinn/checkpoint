@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
      "lib/checkpoint/sessions.rb",
      "lib/checkpoint/user.rb",
      "lib/checkpoint/views/login_form.haml",
+     "lib/checkpoint/views/yadis.erb",
      "spec/checkpoint/authentication_spec.rb",
      "spec/checkpoint/consumer_spec.rb",
      "spec/checkpoint/idcheck_spec.rb",

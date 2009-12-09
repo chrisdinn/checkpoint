@@ -10,6 +10,17 @@ module Checkpoint
     end
     
     def ensure_authenticated
+      if trust_root = session_return_to || params['return_to']
+        if ::Checkpoint::Consumer.allowed?(trust_root)
+          if current_user
+            redirect "#{trust_root}?id=#{current_user.id}"
+          else
+            session[:checkpoint_return_to] = trust_root
+          end
+        else
+          forbidden!
+        end
+      end
       throw(:halt, [401, haml(:login_form)]) unless current_user
     end
     
