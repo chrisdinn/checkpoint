@@ -1,5 +1,6 @@
 -if session[:notice]
   %p= session[:notice]
+
 %fieldset
   %legend You need to log in, buddy.
   %form{:action => "/sso/login", :method => 'POST'}
